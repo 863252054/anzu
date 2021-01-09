@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_order, R.id.navigation_goods, R.id.navigation_msg, R.id.navigation_my)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        //取消标题栏
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
