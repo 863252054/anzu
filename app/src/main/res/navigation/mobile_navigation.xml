@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_order">
+
+    <fragment
+        android:id="@+id/navigation_order"
+        android:name="com.example.anzu.ui.order.OrderFragment"
+        android:label="@string/title_order"
+        tools:layout="@layout/fragment_order" />
+
+    <fragment
+        android:id="@+id/navigation_goods"
+        android:name="com.example.anzu.ui.goods.GoodsFragment"
+        android:label="@string/title_order"
+        tools:layout="@layout/fragment_goods" />
+
+    <fragment
+        android:id="@+id/navigation_msg"
+        android:name="com.example.anzu.ui.msg.MsgFragment"
+        android:label="@string/title_msg"
+        tools:layout="@layout/fragment_msg" />
+
+    <fragment
+        android:id="@+id/navigation_my"
+        android:name="com.example.anzu.ui.my.MyFragment"
+        android:label="@string/title_my"
+        tools:layout="@layout/fragment_my" />
+</navigation>
