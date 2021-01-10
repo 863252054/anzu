@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="340dp"
+            android:layout_height="380dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_noborder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/order_waitdeleiver_img"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_finish" />
+
+            <TextView
+                android:id="@+id/order_underway_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="A0000000001"
+                app:layout_constraintBottom_toBottomOf="@+id/order_waitdeleiver_img"
+                app:layout_constraintStart_toEndOf="@+id/order_waitdeleiver_img"
+                app:layout_constraintTop_toTopOf="@+id/order_waitdeleiver_img" />
+
+            <TextView
+                android:id="@+id/order_underway_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="已互评"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/order_underway_number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/order_underway_number" />
+
+            <TextView
+                android:id="@+id/order_underway_msg_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="下单时间："
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_waitdeleiver_img" />
+
+            <TextView
+                android:id="@+id/order_underway_msg_text"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2020-01-03 20:53"
+                app:layout_constraintStart_toEndOf="@+id/order_underway_msg_title"
+                app:layout_constraintTop_toBottomOf="@+id/order_waitdeleiver_img" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/order_underway_line1"
+                android:layout_width="340dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="#f3f9ff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_msg_text1" />
+
+
+            <ImageView
+                android:id="@+id/order_underway_goods1_img"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_line1"
+                app:srcCompat="@drawable/ic_order_goods" />
+
+            <TextView
+                android:id="@+id/order_underway_goods1_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="小霸王游戏..."
+                android:textColor="#555555"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/order_underway_goods1_img"
+                app:layout_constraintStart_toEndOf="@+id/order_underway_goods1_img"
+                app:layout_constraintTop_toTopOf="@+id/order_underway_goods1_img"
+                app:layout_constraintVertical_bias="0.05" />
+
+            <TextView
+                android:id="@+id/order_underway_goods1_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="7天 ￥14"
+                android:textColor="#555555"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/order_underway_goods1_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/order_underway_goods1_title" />
+
+            <TextView
+                android:id="@+id/order_underway_goods1_detail1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="编码：0001A"
+                app:layout_constraintStart_toEndOf="@+id/order_underway_goods1_img"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_goods1_title" />
+
+            <TextView
+                android:id="@+id/order_underway_goods1_title_detai2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="银白30cm"
+                app:layout_constraintStart_toEndOf="@+id/order_underway_goods1_img"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_goods1_detail1" />
+
+            <TextView
+                android:id="@+id/order_underway_goods1_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="x8"
+                app:layout_constraintBottom_toBottomOf="@+id/order_underway_goods1_title_detai2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/order_underway_goods1_title_detai2" />
+
+            <TextView
+                android:id="@+id/order_underway_sum_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="共8件 (店铺活动：满30包邮)"
+                app:layout_constraintBottom_toBottomOf="@+id/order_underway_sum_money"
+                app:layout_constraintEnd_toStartOf="@+id/order_underway_sum_money"
+                app:layout_constraintTop_toTopOf="@+id/order_underway_sum_money" />
+
+            <TextView
+                android:id="@+id/order_underway_sum_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="112.00"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_goods1_img" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/order_underway_line4"
+                android:layout_width="340dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="#f3f9ff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_sum_money" />
+
+            <TextView
+                android:id="@+id/order_underway_receive_name_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="用户昵称："
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_line4" />
+
+            <TextView
+                android:id="@+id/order_underway_receive_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="山水之间"
+                android:textColor="#555555"
+                app:layout_constraintBottom_toBottomOf="@+id/order_underway_receive_name_title"
+                app:layout_constraintStart_toEndOf="@+id/order_underway_receive_name_title"
+                app:layout_constraintTop_toTopOf="@+id/order_underway_receive_name_title" />
+
+            <TextView
+                android:id="@+id/order_underway_receive_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="好评"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/order_underway_receive_name_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/order_underway_receive_name_text" />
+
+            <TextView
+                android:id="@+id/order_underway_receive_address_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="评价内容："
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_receive_name_title" />
+
+            <TextView
+                android:id="@+id/order_underway_receive_address_text"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:text="宝贝跟新的机器一样！但是游戏比较旧，有点过时了"
+                android:textColor="#555555"
+                app:layout_constraintBottom_toBottomOf="@+id/order_underway_receive_address_title"
+                app:layout_constraintStart_toEndOf="@+id/order_underway_receive_address_title"
+                app:layout_constraintTop_toTopOf="@+id/order_underway_receive_address_title"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/order_underway_line5"
+                android:layout_width="340dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="#f3f9ff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_receive_address_text" />
+
+            <Button
+                android:id="@+id/order_deliver_button"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/xy_button_blue"
+                android:text="查看详情"
+                android:textColor="#ffffff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_line5" />
+
+            <TextView
+                android:id="@+id/order_underway_msg_title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="完成时间："
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/order_underway_msg_title" />
+
+            <TextView
+                android:id="@+id/order_underway_msg_text1"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="2020-01-12 14:12"
+                app:layout_constraintBottom_toBottomOf="@+id/order_underway_msg_title1"
+                app:layout_constraintStart_toEndOf="@+id/order_underway_msg_title1"
+                app:layout_constraintTop_toTopOf="@+id/order_underway_msg_title1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

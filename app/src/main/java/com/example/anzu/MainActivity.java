@@ -2,16 +2,24 @@ package com.example.anzu;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.view.View;
 
-import com.example.anzu.ui.login.LoginActivity;
+import com.example.anzu.ui.order.OrderPagerAdapter;
+import com.example.anzu.ui.order.orderTab.UnderwayTabFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.viewpager.widget.ViewPager;
+
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,11 +38,12 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        MyApplication myApplication = (MyApplication) getApplication();
-        Toast.makeText(this, myApplication.getUid(), Toast.LENGTH_SHORT).show();
-//        TestQuery testQuery = new TestQuery();
-//        Thread queryThread = new Thread(testQuery);
-//        queryThread.start();
+
+        TestQuery testQuery = new TestQuery();
+        Thread queryThread = new Thread(testQuery);
+        queryThread.start();
     }
+
+
 
 }
