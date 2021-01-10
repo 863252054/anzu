@@ -6,22 +6,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-<!--    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">-->
-<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-<!--        <item name="colorAccent">@color/colorAccent</item>-->
-<!--        <item name="android:windowTranslucentStatus">true</item>-->
-<!--        <item name="android:statusBarColor">@color/colorPrimary</item>-->
-<!--        <item name="android:windowBackground">@color/colorBackground</item>-->
-<!--&lt;!&ndash;        <item name="redText">@color/red</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="bg">@color/Background</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="tittleText">@color/tittleText</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="title_layout">@drawable/side_nav_bar</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="no_data">@drawable/no_data</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="primary_text">@color/primary_text</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="second_text">@color/secondary_text</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="second_bg">@color/second_bg</item>&ndash;&gt;-->
-<!--    </style>-->
     //没有ActionBar，背景纯白，导航栏不透明
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>

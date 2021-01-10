@@ -2,7 +2,9 @@ package com.example.anzu;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.anzu.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,9 +30,11 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        TestQuery testQuery = new TestQuery();
-        Thread queryThread = new Thread(testQuery);
-        queryThread.start();
+        MyApplication myApplication = (MyApplication) getApplication();
+        Toast.makeText(this, myApplication.getUid(), Toast.LENGTH_SHORT).show();
+//        TestQuery testQuery = new TestQuery();
+//        Thread queryThread = new Thread(testQuery);
+//        queryThread.start();
     }
 
 }
