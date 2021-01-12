@@ -25,7 +25,7 @@ public class MsgFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_msg, container, false);
         tabLayout = (TabLayout) root.findViewById(R.id.msg_tab_layout);
         viewPager = (ViewPager) root.findViewById(R.id.msg_view_pager);
-        MyPagerAdapter adapter = new MyPagerAdapter(getFragmentManager());
+        MyPagerAdapter adapter = new MyPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         return root;

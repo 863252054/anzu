@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="ui.goods.GoodsFragment">
 
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/msg_tab_layout"
         android:layout_width="0dp"
@@ -23,7 +24,7 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/msg_view_pager"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="645dp"
         app:layout_constraintStart_toStartOf="@+id/msg_tab_layout"
         app:layout_constraintTop_toBottomOf="@+id/msg_tab_layout" />
 
