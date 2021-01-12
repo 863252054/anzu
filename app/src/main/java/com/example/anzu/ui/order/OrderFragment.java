@@ -44,7 +44,7 @@ public class OrderFragment extends Fragment {
 
         //展示页的设置
         orderTabLayout.setupWithViewPager(orderViewPager,false);
-        orderPagerAdapter = new OrderPagerAdapter(orderFragments, getFragmentManager());
+        orderPagerAdapter = new OrderPagerAdapter(orderFragments, getChildFragmentManager());
         orderViewPager.setAdapter(orderPagerAdapter);
 
         for(int i=0;i<orderTitles.length;i++){

@@ -4,4 +4,8 @@
     <string name="title_order">订单</string>
     <string name="title_msg">消息</string>
     <string name="title_my">我的</string>
+
+
+
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
 </resources>
