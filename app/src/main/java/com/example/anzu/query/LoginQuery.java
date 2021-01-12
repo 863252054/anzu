@@ -23,7 +23,7 @@ public class LoginQuery implements Runnable {
     private Handler handler;
     private String cellphone;
     private String password;
-    private static String url = "http://172.20.10.2:8886/shopUser/login";
+    private static String url = "https://www.yuan619.xyz:8886/shopUser/login";
 
     public LoginQuery(String cellphone, String password, Handler handler) {
         this.cellphone = cellphone;
