@@ -7,6 +7,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -18,11 +19,13 @@ import com.example.anzu.MainActivity;
 import com.example.anzu.R;
 import com.example.anzu.bean.ShopUser;
 import com.example.anzu.query.LoginQuery;
+import com.example.anzu.ui.register.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private Button loginBtn;
     private EditText cellphone;
     private EditText password;
+    private TextView toRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginBtn = (Button) findViewById(R.id.login_btn_login);
         cellphone = (EditText) findViewById(R.id.login_et_cellphone);
         password = (EditText) findViewById(R.id.login_et_password);
+        toRegister = (TextView) findViewById(R.id.login_tv_register);
 
         //handler
         final Handler handler = new Handler() {
@@ -66,6 +70,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         password.getText().toString(), handler);
                 Thread loginThread = new Thread(loginQuery);
                 loginThread.start();
+            }
+        });
+        //去注册
+        toRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }

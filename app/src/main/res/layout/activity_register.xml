@@ -6,25 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="157dp"
-        android:layout_height="140dp"
-        android:layout_marginBottom="96dp"
-        app:layout_constraintBottom_toBottomOf="@+id/login_et_cellphone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/img_logo" />
-
     <com.example.anzu.ui.login.ClearEditText
-        android:id="@+id/login_et_cellphone"
+        android:id="@+id/register_et_cellphone"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="268dp"
+        android:layout_marginTop="184dp"
         android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/edittext_background"
         android:drawableLeft="@drawable/ic_phone"
         android:hint="请输入手机号"
@@ -34,18 +24,55 @@
         android:paddingRight="15dp"
         android:singleLine="true"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/register_btn_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.anzu.ui.login.ClearEditText
-        android:id="@+id/login_et_password"
+        android:id="@+id/register_et_code"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="328dp"
+        android:layout_marginTop="254dp"
+        android:layout_marginEnd="7dp"
+        android:background="@drawable/edittext_background"
+        android:drawableLeft="@drawable/ic_code"
+        android:hint="请输入验证码"
+        android:inputType="number"
+        android:maxLength="6"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:singleLine="true"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/register_btn_code"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/register_btn_code"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/background_button_color"
+        android:text="获取验证码"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/register_et_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/register_et_code"
+        app:layout_constraintTop_toTopOf="@+id/register_et_code" />
+
+    <com.example.anzu.ui.login.ClearEditText
+        android:id="@+id/register_et_password"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="324dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/edittext_background"
         android:drawableLeft="@drawable/ic_password"
@@ -61,42 +88,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/login_btn_login"
+        android:id="@+id/register_btn_register"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/background_button_color"
-        android:text="登录"
+        android:text="注册"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_et_cellphone"
-        app:layout_constraintVertical_bias="0.277" />
+        app:layout_constraintTop_toBottomOf="@+id/register_et_cellphone"
+        app:layout_constraintVertical_bias="0.409" />
 
     <TextView
-        android:id="@+id/login_tv_forget"
+        android:id="@+id/register_tv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
-        android:text="忘记密码"
+        android:clickable="true"
+        android:text="已有账号，去登录"
         android:textColor="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_btn_login" />
-
-    <TextView
-        android:id="@+id/login_tv_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="20dp"
-        android:text="快速注册"
-        android:textColor="@color/colorText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/register_btn_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
