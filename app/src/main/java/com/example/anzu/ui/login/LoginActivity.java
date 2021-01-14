@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +24,7 @@ import com.example.anzu.bean.ShopUser;
 import com.example.anzu.query.LoginQuery;
 import com.example.anzu.ui.register.RegisterActivity;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private EditText cellphone;
     private EditText password;
@@ -30,16 +33,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //初始化
         init();
-
-    }
-    //初始化
-    public void init() {
-        //绑定组件
-        loginBtn = (Button) findViewById(R.id.login_btn_login);
-        cellphone = (EditText) findViewById(R.id.login_et_cellphone);
-        password = (EditText) findViewById(R.id.login_et_password);
-        toRegister = (TextView) findViewById(R.id.login_tv_register);
 
         //handler
         final Handler handler = new Handler() {
@@ -50,8 +45,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         MyApplication myApplication = (MyApplication) getApplication();
                         myApplication.setUid(((ShopUser) msg.obj).getUid());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
                         LoginActivity.this.finish();
+                        startActivity(intent);
                         break;
                     case Constants.FAIL:
                         Toast.makeText(LoginActivity.this, "手机号或密码错误", Toast.LENGTH_SHORT).show();
@@ -62,7 +57,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         };
-        //登录
+
+        //监听登录按钮
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +68,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 loginThread.start();
             }
         });
-        //去注册
+
+        //监听去注册按钮
         toRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,21 +77,66 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
             }
         });
-    }
 
-    @Override
-    public void onClick(View v) {
+        //监听手机号输入
+        cellphone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (cellphone.getText().toString().length() == 0) {
+                    loginBtn.setEnabled(false);
+                    loginBtn.setAlpha((float) 0.6);
+                } else {
+                    if (password.getText().toString().length() != 0) {
+                        loginBtn.setEnabled(true);
+                        loginBtn.setAlpha((float) 1);
+                    }
+                }
+            }
+        });
+
+        //监听密码输入
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (password.getText().toString().length() == 0) {
+                    loginBtn.setEnabled(false);
+                    loginBtn.setAlpha((float) 0.6);
+                } else {
+                    if (cellphone.getText().toString().length() != 0) {
+                        loginBtn.setEnabled(true);
+                        loginBtn.setAlpha((float) 1);
+                    }
+                }
+            }
+        });
 
     }
-    //点击事件
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.login_btn_login:
-//                LoginQuery loginQuery = new LoginQuery(cellphone.getText().toString(),
-//                        password.getText().toString(), handler);
-//                Thread loginThread = new Thread(loginQuery);
-//                loginThread.start();
-//        }
-//    }
+    //初始化
+    public void init() {
+        //绑定组件
+        loginBtn = (Button) findViewById(R.id.login_btn_login);
+        cellphone = (EditText) findViewById(R.id.login_et_cellphone);
+        password = (EditText) findViewById(R.id.login_et_password);
+        toRegister = (TextView) findViewById(R.id.login_tv_register);
+    }
 }

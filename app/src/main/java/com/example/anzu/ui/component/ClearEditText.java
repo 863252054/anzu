@@ -1,4 +1,4 @@
-package com.example.anzu.ui.login;
+package com.example.anzu.ui.component;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.widget.EditText;
 
 import com.example.anzu.R;
 
