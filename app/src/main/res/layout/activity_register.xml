@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <com.example.anzu.ui.component.ClearEditText
+    <com.example.anzu.ui.components.ClearEditText
         android:id="@+id/register_et_cellphone"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.anzu.ui.component.ClearEditText
+    <com.example.anzu.ui.components.ClearEditText
         android:id="@+id/register_et_code"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -70,7 +70,7 @@
         app:layout_constraintStart_toEndOf="@+id/register_et_code"
         app:layout_constraintTop_toTopOf="@+id/register_et_code" />
 
-    <com.example.anzu.ui.component.ClearEditText
+    <com.example.anzu.ui.components.ClearEditText
         android:id="@+id/register_et_password"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -118,7 +118,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:clickable="true"
-        android:text="已有账号，去登录"
+        android:text="已有账号，去登录>"
         android:textColor="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

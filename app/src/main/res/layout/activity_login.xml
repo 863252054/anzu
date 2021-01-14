@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/img_logo" />
 
-    <com.example.anzu.ui.component.ClearEditText
+    <com.example.anzu.ui.components.ClearEditText
         android:id="@+id/login_et_cellphone"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.anzu.ui.component.ClearEditText
+    <com.example.anzu.ui.components.ClearEditText
         android:id="@+id/login_et_password"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -103,5 +103,27 @@
         android:textColor="@color/colorText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_btn_login" />
+
+    <TextView
+        android:id="@+id/login_tv_bottom1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="登录即代表阅读并同意《用户服务协议》《隐私策略》"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--    <TextView-->
+<!--        android:id="@+id/login_tv_bottom2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="73dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:text="《用户服务协议》《隐私策略》"-->
+<!--        android:textColor="@color/colorAccent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

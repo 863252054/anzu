@@ -1,4 +1,4 @@
-package com.example.anzu.ui.component;
+package com.example.anzu.ui.components;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

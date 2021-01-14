@@ -4,6 +4,7 @@ import android.app.Application;
 
 public class MyApplication extends Application {
     private String uid;
+    private String LogoPath;
 
     public String getUid() {
         return uid;
@@ -13,7 +14,14 @@ public class MyApplication extends Application {
         this.uid = uid;
     }
 
-//    @Override
+    public String getLogoPath() {
+        return LogoPath;
+    }
+
+    public void setLogoPath(String logoPath) {
+        LogoPath = logoPath;
+    }
+    //    @Override
 //    public void onCreate() {
 //        super.onCreate();
 //    }
