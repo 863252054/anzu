@@ -15,7 +15,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:background="@drawable/background_shade_color">
 
             <ImageView
@@ -23,6 +23,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
                 android:src="@drawable/ic_return_white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +33,7 @@
                 android:id="@+id/order_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:text="入驻安租"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
@@ -55,17 +57,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/open_shop_top" />
 
-    <ImageView
-        android:id="@+id/test_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/image_circle"
-        android:clickable="true"
-        android:src="@drawable/ic_lease"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/open_iv_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
