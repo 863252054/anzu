@@ -45,17 +45,101 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/open_iv_logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/ic_lease"
-        android:background="@drawable/image_circle"
-        android:clickable="true"
+    <LinearLayout
+        android:id="@+id/open_holder"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/open_shop_top">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg_noborder">
+
+            <TextView
+                android:id="@+id/open_tv_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center|left"
+                android:text="联系人"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.anzu.ui.components.ClearEditText
+                android:id="@+id/open_et_holder"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="15dp"
+                android:hint="请输入联系人姓名"
+                app:layout_constraintBottom_toBottomOf="@+id/open_tv_holder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/open_tv_holder"
+                app:layout_constraintTop_toTopOf="@+id/open_tv_holder"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <View
+                android:id="@+id/open_holder_line"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/colorGray"
+                app:layout_constraintEnd_toEndOf="@+id/open_et_holder"
+                app:layout_constraintStart_toStartOf="@+id/open_tv_holder"
+                app:layout_constraintTop_toBottomOf="@+id/open_tv_holder" />
+
+            <TextView
+                android:id="@+id/open_tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:gravity="center|left"
+                android:text="联系电话"
+                android:textColor="@color/colorText"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/open_holder_line" />
+
+            <com.example.anzu.ui.components.ClearEditText
+                android:id="@+id/open_et_phone"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:hint="便于后续安租与您联系"
+                app:layout_constraintStart_toStartOf="@+id/open_et_holder"
+                app:layout_constraintTop_toBottomOf="@+id/open_holder_line" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/open_iv_logo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="528dp"
+        android:clickable="true"
+        android:src="@drawable/ic_lease"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/open_shop_top" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/open_tv_logo"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="设置店铺logo"-->
+<!--        tools:layout_editor_absoluteX="88dp"-->
+<!--        tools:layout_editor_absoluteY="608dp" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
