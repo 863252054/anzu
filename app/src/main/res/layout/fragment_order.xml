@@ -16,13 +16,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:background="@drawable/background_shade_color">
 
             <TextView
                 android:id="@+id/order_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:text="订单管理"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
@@ -37,9 +38,9 @@
                 android:layout_height="32dp"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_search_white"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/order_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/order_title" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.tabs.TabLayout
@@ -52,7 +53,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/order_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="595dp" />
+            android:layout_height="565dp" />
     </LinearLayout>
 
 </LinearLayout>

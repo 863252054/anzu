@@ -11,10 +11,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:colorControlNormal">@android:color/white</item>
-<!--        <item name="redText">@color/red</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--        <item name="redText">@color/red</item>-->
 <!--        <item name="bg">@color/Background</item>-->
 <!--        <item name="tittleText">@color/tittleText</item>-->
 <!--        <item name="title_layout">@drawable/side_nav_bar</item>-->
