@@ -23,12 +23,14 @@ import com.example.anzu.R;
 import com.example.anzu.bean.ShopUser;
 import com.example.anzu.query.LoginQuery;
 import com.example.anzu.ui.register.RegisterActivity;
+import com.example.anzu.utils.StringDesignUtil;
 
 public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private EditText cellphone;
     private EditText password;
     private TextView toRegister;
+    private TextView loginTip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,5 +140,10 @@ public class LoginActivity extends AppCompatActivity {
         cellphone = (EditText) findViewById(R.id.login_et_cellphone);
         password = (EditText) findViewById(R.id.login_et_password);
         toRegister = (TextView) findViewById(R.id.login_tv_register);
+        loginTip = (TextView) findViewById(R.id.login_tv_tip);
+
+        //设置属性
+        String tipText = "登录即代表阅读并同意《用户服务协议》《隐私策略》";
+        loginTip.setText(StringDesignUtil.getSpanned(tipText, "《用户服务协议》《隐私策略》", "#FF7F00"));
     }
 }

@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="214dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/edittext_background"
@@ -25,11 +25,12 @@
         android:paddingRight="15dp"
         android:singleLine="true"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/register_btn_code"
+        app:layout_constraintBottom_toTopOf="@+id/register_et_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.example.anzu.ui.components.ClearEditText
         android:id="@+id/register_et_code"
@@ -37,8 +38,9 @@
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="254dp"
+        android:layout_marginTop="288dp"
         android:layout_marginEnd="7dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/edittext_background"
         android:drawableLeft="@drawable/ic_code"
         android:drawablePadding="10dp"
@@ -49,6 +51,7 @@
         android:paddingRight="15dp"
         android:singleLine="true"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/register_et_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/register_btn_code"
         app:layout_constraintHorizontal_bias="0.0"
@@ -76,7 +79,7 @@
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="324dp"
+        android:layout_marginTop="354dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/edittext_background"
         android:drawableLeft="@drawable/ic_password"
@@ -99,10 +102,10 @@
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        android:background="@drawable/background_button_color"
-        android:text="注册"
-        android:enabled="false"
         android:alpha="0.6"
+        android:background="@drawable/background_button_color"
+        android:enabled="false"
+        android:text="注册"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -110,7 +113,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_et_cellphone"
-        app:layout_constraintVertical_bias="0.409" />
+        app:layout_constraintVertical_bias="0.458" />
 
     <TextView
         android:id="@+id/register_tv_login"
