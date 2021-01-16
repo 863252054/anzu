@@ -13,8 +13,11 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:colorControlNormal">@android:color/white</item>
+        //沉浸式状态栏
         <item name="android:windowTranslucentStatus">true</item>
+        //状态栏字体颜色
         <item name="android:windowLightStatusBar">true</item>
+        //状态栏背景色透明
         <item name="android:statusBarColor">@android:color/transparent</item>
         <!--        <item name="redText">@color/red</item>-->
 <!--        <item name="bg">@color/Background</item>-->
@@ -36,6 +39,11 @@
     </style>
     <style name="TabLayoutTextStyle">
         <item name="android:textSize">@dimen/text_size</item>
+    </style>
+
+    <style name="goods_spinner" parent="Theme.AppCompat.Light">
+        <!-- AppCompatEditText默认状态状态设置底线颜色 -->
+        <item name="colorControlNormal">#888888</item>
     </style>
 
     <style name="take_photo_anim" parent="android:Animation">
