@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_class">
+        <item>点击选择类别</item>
+        <item>数码类</item>
+        <item>服饰类</item>
+        <item>家居类</item>
+        <item>文娱类</item>
+        <item>其他</item>
+    </string-array>
+</resources>

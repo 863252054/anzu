@@ -21,7 +21,9 @@ import com.example.anzu.MyApplication;
 import com.example.anzu.MainActivity;
 import com.example.anzu.R;
 import com.example.anzu.bean.ShopUser;
+import com.example.anzu.query.GetShopQuery;
 import com.example.anzu.query.LoginQuery;
+import com.example.anzu.ui.openShop.OpenShopActivity;
 import com.example.anzu.ui.register.RegisterActivity;
 import com.example.anzu.utils.StringDesignUtil;
 
@@ -46,8 +48,8 @@ public class LoginActivity extends AppCompatActivity {
                     case Constants.OK:
                         MyApplication myApplication = (MyApplication) getApplication();
                         myApplication.setUid(((ShopUser) msg.obj).getUid());
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        LoginActivity.this.finish();
+                        Intent intent = new Intent(LoginActivity.this, OpenShopActivity.class);
+                        LoginActivity.this.onPause();
                         startActivity(intent);
                         break;
                     case Constants.FAIL:

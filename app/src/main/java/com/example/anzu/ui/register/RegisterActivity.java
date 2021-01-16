@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -179,7 +180,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        //监听去登录
+        //监听点击登录
         toLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

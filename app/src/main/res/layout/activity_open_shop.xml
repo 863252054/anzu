@@ -19,12 +19,13 @@
             android:background="@drawable/background_shade_color">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/open_iv_back"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
                 android:src="@drawable/ic_return_white"
+                android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +49,7 @@
     <LinearLayout
         android:id="@+id/open_holder"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/open_shop_top">
@@ -74,18 +75,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.example.anzu.ui.components.ClearEditText
+            <EditText
                 android:id="@+id/open_et_holder"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="35dp"
                 android:layout_marginEnd="15dp"
                 android:hint="请输入联系人姓名"
+                android:background="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/open_tv_holder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/open_tv_holder"
                 app:layout_constraintTop_toTopOf="@+id/open_tv_holder"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/open_iv_warn1"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_warn"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/open_et_holder"
+                app:layout_constraintLeft_toRightOf="@+id/open_et_holder"
+                app:layout_constraintTop_toTopOf="@+id/open_et_holder" />
 
             <View
                 android:id="@+id/open_holder_line"
@@ -109,37 +121,369 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/open_holder_line" />
 
-            <com.example.anzu.ui.components.ClearEditText
+            <EditText
                 android:id="@+id/open_et_phone"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:background="@null"
                 android:hint="便于后续安租与您联系"
+                android:inputType="number"
+                android:maxLength="11"
+                app:layout_constraintEnd_toEndOf="@+id/open_et_holder"
                 app:layout_constraintStart_toStartOf="@+id/open_et_holder"
                 app:layout_constraintTop_toBottomOf="@+id/open_holder_line" />
+
+            <ImageView
+                android:id="@+id/open_iv_warn2"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_warn"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/open_et_phone"
+                app:layout_constraintLeft_toRightOf="@+id/open_et_phone"
+                app:layout_constraintTop_toTopOf="@+id/open_et_phone" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/open_iv_logo"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="528dp"
-        android:clickable="true"
-        android:src="@drawable/ic_lease"
+    <LinearLayout
+        android:id="@+id/open_shop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.761"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/open_shop_top" />
+        app:layout_constraintTop_toBottomOf="@+id/open_holder">
 
-<!--    <TextView-->
-<!--        android:id="@+id/open_tv_logo"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="设置店铺logo"-->
-<!--        tools:layout_editor_absoluteX="88dp"-->
-<!--        tools:layout_editor_absoluteY="608dp" />-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_noborder">
 
+            <TextView
+            android:id="@+id/open_shop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center|left"
+            android:text="店铺名称"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/open_et_shop_name"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginEnd="15dp"
+                android:background="@null"
+                android:hint="请输入店铺名称"
+                app:layout_constraintBottom_toBottomOf="@+id/open_shop_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/open_shop_name"
+                app:layout_constraintTop_toTopOf="@+id/open_shop_name" />
+
+            <ImageView
+                android:id="@+id/open_iv_warn3"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_warn"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/open_et_shop_name"
+                app:layout_constraintLeft_toRightOf="@+id/open_et_shop_name"
+                app:layout_constraintTop_toTopOf="@+id/open_et_shop_name" />
+
+            <View
+                android:id="@+id/open_shop_line1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/colorGray"
+                app:layout_constraintEnd_toEndOf="@+id/open_et_shop_name"
+                app:layout_constraintStart_toStartOf="@+id/open_shop_name"
+                app:layout_constraintTop_toBottomOf="@+id/open_shop_name" />
+
+            <TextView
+                android:id="@+id/open_shop_type"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center|left"
+                android:text="主营类型"
+                android:textColor="@color/colorText"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/open_shop_name"
+                app:layout_constraintStart_toStartOf="@+id/open_shop_name"
+                app:layout_constraintTop_toBottomOf="@+id/open_shop_line1" />
+
+            <Spinner
+                android:id="@+id/open_sp_shop_type"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:spinnerMode="dropdown"
+                android:overlapAnchor="false"
+                android:entries="@array/type_class"
+                android:backgroundTint="@color/colorText"
+                app:layout_constraintEnd_toEndOf="@+id/open_et_shop_name"
+                app:layout_constraintStart_toStartOf="@+id/open_et_shop_name"
+                app:layout_constraintTop_toBottomOf="@+id/open_shop_line1" />
+
+            <ImageView
+                android:id="@+id/open_iv_warn4"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_warn"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/open_sp_shop_type"
+                app:layout_constraintLeft_toRightOf="@+id/open_sp_shop_type"
+                app:layout_constraintTop_toTopOf="@+id/open_sp_shop_type" />
+
+            <View
+                android:id="@+id/open_shop_line2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/colorGray"
+                app:layout_constraintEnd_toEndOf="@+id/open_sp_shop_type"
+                app:layout_constraintStart_toStartOf="@+id/open_shop_type"
+                app:layout_constraintTop_toBottomOf="@+id/open_shop_type" />
+
+            <TextView
+                android:id="@+id/open_shop_address"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center|left"
+                android:text="店铺地址"
+                android:textColor="@color/colorText"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/open_shop_type"
+                app:layout_constraintStart_toStartOf="@+id/open_shop_type"
+                app:layout_constraintTop_toBottomOf="@+id/open_shop_line2" />
+
+            <EditText
+                android:id="@+id/open_et_shop_address"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:hint="用于退换、寄回商品"
+                app:layout_constraintEnd_toEndOf="@+id/open_et_shop_name"
+                app:layout_constraintStart_toStartOf="@+id/open_et_shop_name"
+                app:layout_constraintTop_toBottomOf="@+id/open_shop_line2" />
+
+            <ImageView
+                android:id="@+id/open_iv_warn5"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_warn"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/open_et_shop_address"
+                app:layout_constraintLeft_toRightOf="@+id/open_et_shop_address"
+                app:layout_constraintTop_toTopOf="@+id/open_et_shop_address" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/open_logo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/open_shop">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_noborder">
+
+            <TextView
+                android:id="@+id/open_tv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center|left"
+                android:text="店铺头像"
+                android:textColor="@color/colorText"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/open_iv_logo"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="15dp"
+                android:clickable="true"
+                android:src="@drawable/ic_lease"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/open_tv_logo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/open_tv_logo_tip"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:text="(请设置店铺头像)"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/open_iv_logo"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/open_iv_logo"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/open_iv_logo" />-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/open_license"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/open_logo">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_noborder">
+
+            <TextView
+                android:id="@+id/open_tv_license"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:gravity="top|left"
+                android:text="营业执照"
+                android:textColor="@color/colorText"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/open_iv_license"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="15dp"
+                android:clickable="true"
+                android:src="@drawable/ic_plus"
+                android:background="@drawable/picture_border_grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/open_tv_license"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/open_iv_warn6"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/ic_warn"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/open_iv_license"
+                app:layout_constraintLeft_toRightOf="@+id/open_iv_license"
+                app:layout_constraintTop_toTopOf="@+id/open_iv_license" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/open_tv_license_tip"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:text="(用于审核)"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/open_iv_license"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/open_iv_license"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/open_iv_license" />-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/open_check"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_weight="1"
+        android:text="我已阅读并同意《安租商家协议》"
+        android:textColor="@color/colorText"
+        android:buttonTint="@color/colorText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/open_license" />
+
+    <ImageView
+        android:id="@+id/open_iv_warn7"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/ic_warn"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/open_check"
+        app:layout_constraintLeft_toRightOf="@+id/open_check"
+        app:layout_constraintTop_toTopOf="@+id/open_check" />
+
+    <LinearLayout
+        android:id="@+id/open_commit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg_noborder">
+
+            <Button
+                android:id="@+id/open_btn_commit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/background_button_color"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

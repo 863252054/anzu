@@ -5,10 +5,9 @@ public class Shop {
     private String shopName;
     private String shopLogo;
     private String shopType;
-    private String shopSecondType;
     private String shopAddress;
-    private String shopIntroduce;
     private String holderName;
+    private String holderPhone;
 
     public String getUid() {
         return uid;
@@ -42,14 +41,6 @@ public class Shop {
         this.shopType = shopType;
     }
 
-    public String getShopSecondType() {
-        return shopSecondType;
-    }
-
-    public void setShopSecondType(String shopSecondType) {
-        this.shopSecondType = shopSecondType;
-    }
-
     public String getShopAddress() {
         return shopAddress;
     }
@@ -58,19 +49,19 @@ public class Shop {
         this.shopAddress = shopAddress;
     }
 
-    public String getShopIntroduce() {
-        return shopIntroduce;
-    }
-
-    public void setShopIntroduce(String shopIntroduce) {
-        this.shopIntroduce = shopIntroduce;
-    }
-
     public String getHolderName() {
         return holderName;
     }
 
     public void setHolderName(String holderName) {
         this.holderName = holderName;
+    }
+
+    public String getHolderPhone() {
+        return holderPhone;
+    }
+
+    public void setHolderPhone(String holderPhone) {
+        this.holderPhone = holderPhone;
     }
 }
