@@ -3,7 +3,7 @@ package com.example.anzu;
 import android.app.Application;
 
 public class MyApplication extends Application {
-    private String uid;
+    private String uid = "";
     private String LogoPath;
 
     public String getUid() {

@@ -1,10 +1,14 @@
 package com.example.anzu;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.example.anzu.query.GetShopQuery;
 import com.example.anzu.ui.order.OrderPagerAdapter;
 import com.example.anzu.ui.order.orderTab.UnderwayTabFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,10 +42,6 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-
-        TestQuery testQuery = new TestQuery();
-        Thread queryThread = new Thread(testQuery);
-        queryThread.start();
     }
 
 

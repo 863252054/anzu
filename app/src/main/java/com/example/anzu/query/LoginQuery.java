@@ -87,7 +87,7 @@ public class LoginQuery implements Runnable {
                 .post(multipartBody)
                 .build();
         Response response = okHttpClient.newCall(request).execute();
-        if(response.isSuccessful()){
+        if(response.isSuccessful()) {
             Message msg = new Message();
             String result = response.body().string();
             Log.i("查询是否入驻", result);

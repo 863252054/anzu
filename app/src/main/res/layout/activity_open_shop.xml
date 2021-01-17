@@ -46,7 +46,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:id="@+id/open_holder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/open_shop"

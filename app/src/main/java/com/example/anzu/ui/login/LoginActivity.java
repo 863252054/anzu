@@ -24,6 +24,7 @@ import com.example.anzu.bean.ShopUser;
 import com.example.anzu.query.GetShopQuery;
 import com.example.anzu.query.LoginQuery;
 import com.example.anzu.ui.openShop.OpenShopActivity;
+import com.example.anzu.ui.privacy.PrivacyActivity;
 import com.example.anzu.ui.register.RegisterActivity;
 import com.example.anzu.utils.StringDesignUtil;
 
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     case Constants.OK:
                         MyApplication myApplication = (MyApplication) getApplication();
                         myApplication.setUid(((ShopUser) msg.obj).getUid());
+                        Constants.uid = ((ShopUser) msg.obj).getUid();
                         break;
                     case Constants.FAIL:
                         Toast.makeText(LoginActivity.this, "手机号或密码错误", Toast.LENGTH_SHORT).show();
@@ -91,7 +93,8 @@ public class LoginActivity extends AppCompatActivity {
         privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(LoginActivity.this, PrivacyActivity.class);
+                startActivity(intent);
             }
         });
 

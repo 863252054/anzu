@@ -9,6 +9,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.example.anzu.Constants;
 import com.example.anzu.MyApplication;
 import com.example.anzu.bean.Result;
+import com.example.anzu.bean.Shop;
 import com.example.anzu.bean.ShopUser;
 
 import java.io.IOException;
@@ -47,28 +48,23 @@ public class GetShopQuery implements Runnable {
                 .post(multipartBody)
                 .build();
         Response response = okHttpClient.newCall(request).execute();
-        Log.i("success", response.toString());
-        if(response.isSuccessful()){
+        if (response.isSuccessful()) {
+            Message msg = new Message();
             String result = response.body().string();
-            Log.i("testQuery", result);
-            Result<ShopUser> userResult = JSON.parseObject(
+            Log.i("getShopQuery", result);
+            Result<Shop> userResult = JSON.parseObject(
                     result,
-                    new TypeReference<Result<ShopUser>>
-                            (ShopUser.class){});
-            ShopUser shopUser = userResult.getData();
-            Message msg = new Message();
-            if (shopUser != null) {
-                msg.what = Constants.OK;
-                msg.obj = shopUser;
-            } else {
+                    new TypeReference<Result<Shop>>
+                            (Shop.class){});
+            if (userResult.getCode() == 400) {
                 msg.what = Constants.FAIL;
-                msg.obj = null;
+            } else {
+                Shop shop = userResult.getData();
+                if (shop != null) {
+                    msg.what = Constants.OK;
+                    msg.obj = shop;
+                }
             }
-            this.handler.sendMessage(msg);
-        } else {
-            Message msg = new Message();
-            msg.what = Constants.NO;
-            msg.obj = null;
             this.handler.sendMessage(msg);
         }
     }
