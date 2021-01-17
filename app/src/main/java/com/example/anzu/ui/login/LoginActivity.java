@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private TextView toRegister;
     private TextView loginTip;
+    private TextView privacy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +49,19 @@ public class LoginActivity extends AppCompatActivity {
                     case Constants.OK:
                         MyApplication myApplication = (MyApplication) getApplication();
                         myApplication.setUid(((ShopUser) msg.obj).getUid());
-                        Intent intent = new Intent(LoginActivity.this, OpenShopActivity.class);
-                        LoginActivity.this.onPause();
-                        startActivity(intent);
                         break;
                     case Constants.FAIL:
                         Toast.makeText(LoginActivity.this, "手机号或密码错误", Toast.LENGTH_SHORT).show();
                         break;
-                    case Constants.NET:
-                        Toast.makeText(LoginActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    case Constants.OPENED:
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        LoginActivity.this.finish();
+                        startActivity(intent);
+                        break;
+                    case Constants.NO:
+                        Intent intent2 = new Intent(LoginActivity.this, OpenShopActivity.class);
+                        LoginActivity.this.finish();
+                        startActivity(intent2);
                         break;
                 }
             }
@@ -79,6 +84,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        //监听点击《隐私政策》
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
@@ -143,9 +156,10 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.login_et_password);
         toRegister = (TextView) findViewById(R.id.login_tv_register);
         loginTip = (TextView) findViewById(R.id.login_tv_tip);
+        privacy = (TextView) findViewById(R.id.login_tv_link);
 
         //设置属性
-        String tipText = "登录即代表阅读并同意《用户服务协议》《隐私策略》";
-        loginTip.setText(StringDesignUtil.getSpanned(tipText, "《用户服务协议》《隐私策略》", "#FF7F00"));
+        String tipText = "登录即代表阅读并同意《用户服务协议》";
+        loginTip.setText(StringDesignUtil.getSpanned(tipText, "《用户服务协议》", "#FF7F00"));
     }
 }

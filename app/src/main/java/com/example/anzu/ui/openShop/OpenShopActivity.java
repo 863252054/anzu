@@ -65,6 +65,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class OpenShopActivity extends AppCompatActivity implements View.OnClickListener {
     //AK P6Hy0f7PHEo0A13_ow3-0_OGvYdFibL8r4eEicIg
@@ -351,8 +352,10 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     takePhoto();
                 }
                 break;
-            case RC_CHOOSE_PHOTO:   //相册选择照片权限申请返回
-                choosePhoto();
+            case RC_CHOOSE_PHOTO:  //相册选择照片权限申请返回
+                if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    choosePhoto();
+                }
                 break;
         }
     }
@@ -372,7 +375,9 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
         if (!fileDir.exists()) {
             fileDir.mkdirs();
         }
-        File photoFile = new File(fileDir, "photo.jpeg");
+        //随机照片编号
+        String key = new Random().nextLong() + ".jpg";
+        File photoFile = new File(fileDir, key);
         tempPhotoPath = photoFile.getAbsolutePath();
         imageUri = FileProvider7.getUriForFile(this, photoFile);
         intentToTakePhoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);

@@ -23,6 +23,7 @@ import com.example.anzu.R;
 import com.example.anzu.bean.ShopUser;
 import com.example.anzu.query.RegisterQuery;
 import com.example.anzu.ui.login.LoginActivity;
+import com.example.anzu.ui.openShop.OpenShopActivity;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private Button registerBtn;
@@ -31,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText code;
     private EditText password;
     private TextView toLogin;
+    private ImageView back;
 
     private String realCellphone; //保存真实的手机号，防止用户获取验证码后再次修改手机号
 
@@ -54,9 +56,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     case Constants.FAIL:
                         Toast.makeText(RegisterActivity.this, "该手机号已注册，请直接登录", Toast.LENGTH_SHORT).show();
                         break;
-                    case Constants.NET:
-                        Toast.makeText(RegisterActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
-                        break;
                 }
             }
         };
@@ -75,6 +74,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Thread loginThread = new Thread(registerQuery);
                     loginThread.start();
                 }
+            }
+        });
+
+        //监听获取验证码按钮
+        codeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                codeBtn.setEnabled(false);
+                codeBtn.setAlpha((float) 0.6);
+                //60s重试倒计时
+                timer.start();
+                Toast.makeText(RegisterActivity.this, "短信验证码已发送，请注意查收", Toast.LENGTH_SHORT).show();
+                realCellphone = cellphone.getText().toString();
             }
         });
 
@@ -113,18 +125,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        //监听获取验证码按钮
-        codeBtn.setOnClickListener(new View.OnClickListener() {
+        //监听点击返回
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                codeBtn.setEnabled(false);
-                codeBtn.setAlpha((float) 0.6);
-                //60s重试倒计时
-                timer.start();
-                Toast.makeText(RegisterActivity.this, "短信验证码已发送，请注意查收", Toast.LENGTH_SHORT).show();
-                realCellphone = cellphone.getText().toString();
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
+
 
         //监听验证码输入
         code.addTextChangedListener(new TextWatcher() {
@@ -199,6 +208,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         code = (EditText) findViewById(R.id.register_et_code);
         password = (EditText) findViewById(R.id.register_et_password);
         toLogin = (TextView) findViewById(R.id.register_tv_login);
+        back = (ImageView) findViewById(R.id.register_iv_back);
     }
 
     //验证码发送后倒计时

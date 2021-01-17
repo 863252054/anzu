@@ -23,7 +23,9 @@ public class LoginQuery implements Runnable {
     private Handler handler;
     private String cellphone;
     private String password;
+    private String uid = "";
     private static String url = "https://www.yuan619.xyz:8886/shopUser/login";
+    private static String url2 = "https://www.yuan619.xyz:8886/shop/getByUid";
 
     public LoginQuery(String cellphone, String password, Handler handler) {
         this.cellphone = cellphone;
@@ -35,6 +37,7 @@ public class LoginQuery implements Runnable {
     public void run() {
         try {
             doGet();
+            getShop();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,15 +52,12 @@ public class LoginQuery implements Runnable {
                 .build();
         final Request request = new Request.Builder()
                 .url(url)
-                .post(multipartBody)//默认就是GET请求，可以不写
+                .post(multipartBody)
                 .build();
         Response response = okHttpClient.newCall(request).execute();
-        Log.i("success", response.toString());
         if(response.isSuccessful()){
             String result = response.body().string();
-            Log.i("testQuery", result);
-            //解析Json数据
-//            JSON.parseObject(result, User.class);
+            Log.i("登录请求返回值", result);
             Result<ShopUser> userResult = JSON.parseObject(
                     result,
                     new TypeReference<Result<ShopUser>>
@@ -67,15 +67,43 @@ public class LoginQuery implements Runnable {
             if (shopUser != null) {
                 msg.what = Constants.OK;
                 msg.obj = shopUser;
+                this.uid = shopUser.getUid();
             } else {
                 msg.what = Constants.FAIL;
                 msg.obj = null;
             }
             this.handler.sendMessage(msg);
-        } else {
+        }
+    }
+
+    public void getShop() throws IOException {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        MultipartBody multipartBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("uid", uid)
+                .build();
+        final Request request = new Request.Builder()
+                .url(url2)
+                .post(multipartBody)
+                .build();
+        Response response = okHttpClient.newCall(request).execute();
+        if(response.isSuccessful()){
             Message msg = new Message();
-            msg.what = Constants.NET;
-            msg.obj = null;
+            String result = response.body().string();
+            Log.i("查询是否入驻", result);
+            Result<ShopUser> userResult = JSON.parseObject(
+                    result,
+                    new TypeReference<Result<ShopUser>>
+                            (ShopUser.class){});
+            if (userResult.getCode() == 400) {
+                msg.what = Constants.NO;
+            } else {
+                ShopUser shopUser = userResult.getData();
+                if (shopUser != null) {
+                    msg.what = Constants.OPENED;
+                    msg.obj = shopUser;
+                }
+            }
             this.handler.sendMessage(msg);
         }
     }
