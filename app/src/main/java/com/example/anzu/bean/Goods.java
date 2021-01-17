@@ -2,10 +2,12 @@ package com.example.anzu.bean;
 
 public class Goods {
     private String uid;
+    private int id;
     private String goodsMain;
     private String goodsSub;
     private String goodsType;
     private String goodsDetail;
+    private String goodsRule;
     private String goodsPriceContent;
     private String goodsPriceDate;
     private String goodsInventory;
@@ -20,6 +22,21 @@ public class Goods {
         this.uid = uid;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getGoodsRule() {
+        return goodsRule;
+    }
+
+    public void setGoodsRule(String goodsRule) {
+        this.goodsRule = goodsRule;
+    }
 
     public String getGoodsMain() {
         return goodsMain;

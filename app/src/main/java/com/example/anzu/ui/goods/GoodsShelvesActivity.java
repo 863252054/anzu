@@ -184,6 +184,7 @@ public class GoodsShelvesActivity extends AppCompatActivity
                     params.put("goodsDetail", goodsDetail.getText().toString());
                     params.put("goodsPriceContent", goodsPriceContent.getText().toString());
                     params.put("goodsPriceDate", mGoodsPriceDateSpinner.getSelectedItem().toString());
+                    params.put("goodsRule", goodsRules.getText().toString());
                     params.put("goodsInventory", goodsInventory.getText().toString());
                     if(modeOne.isChecked()){goodsMode +="1";}
                     if(modeTwo.isChecked()){goodsMode +="2";}
@@ -440,7 +441,7 @@ public class GoodsShelvesActivity extends AppCompatActivity
                 Toast.makeText(GoodsShelvesActivity.this, "您选择的商品类别是：" + content, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.goods_price_date:
-                Toast.makeText(GoodsShelvesActivity.this, "您选择按" + content + "租", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GoodsShelvesActivity.this, "您选择按" + content + "出租", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
