@@ -1,26 +1,26 @@
 package com.example.anzu.ui.goods.goodsTab.goodsData;
 
 public class GoodsItem {
-    private int ImageId;
+    private String imageSource;
     private String title;
     private String typeName;
     private String priceNum;
     private String saveCount;
 
-    public GoodsItem(int imageId, String title, String typeName, String priceNum, String saveCount) {
-        ImageId = imageId;
+    public GoodsItem(String imageSource, String title, String typeName, String priceNum, String saveCount) {
+        this.imageSource = imageSource;
         this.title = title;
         this.typeName = typeName;
         this.priceNum = priceNum;
         this.saveCount = saveCount;
     }
 
-    public int getImageId() {
-        return ImageId;
+    public String getImageSource() {
+        return imageSource;
     }
 
-    public void setImageId(int imageId) {
-        ImageId = imageId;
+    public void setImageSource(String imageSource) {
+        this.imageSource = imageSource;
     }
 
     public String getTitle() {

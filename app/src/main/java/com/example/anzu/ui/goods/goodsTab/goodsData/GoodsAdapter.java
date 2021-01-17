@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.anzu.R;
 
 import java.util.List;
@@ -34,7 +35,9 @@ public class GoodsAdapter extends RecyclerView.Adapter <GoodsAdapter.MyHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         GoodsItem item = list.get (position);
-        holder.img.setImageResource (item.getImageId());
+        Glide.with(context).
+                load(item.getImageSource()).
+                into(holder.img);
         holder.title.setText (item.getTitle ());
         holder.typeName.setText (item.getTypeName ());
         holder.priceNum.setText (item.getPriceNum ());

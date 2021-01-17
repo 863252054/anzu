@@ -175,9 +175,8 @@ public class GoodsShelvesActivity extends AppCompatActivity
                 } else {
                     uploadPic(localUrl);
                     MyApplication myApplication = (MyApplication) getApplication();
-                    myApplication.setUid("123123");
                     Map<String, String> params = new HashMap<>();
-                    params.put("uid", myApplication.getUid());
+                    params.put("uid", Constants.uid);
                     params.put("goodsMain", goodsMain.getText().toString());
                     params.put("goodsSub", goodsSub.getText().toString());
                     params.put("goodsType", mGoodsCategorySpinner.getSelectedItem().toString());
@@ -384,7 +383,7 @@ public class GoodsShelvesActivity extends AppCompatActivity
         if (!fileDir.exists()) {
             fileDir.mkdirs();
         }
-        String key = new Random().nextLong() + ".jpg";
+        String key = new Random().nextLong() + ".jpeg";
         File photoFile = new File(fileDir, key);
         tempPhotoPath = photoFile.getAbsolutePath();
         imageUri = FileProvider7.getUriForFile(this, photoFile);
@@ -517,9 +516,7 @@ public class GoodsShelvesActivity extends AppCompatActivity
         UploadManager uploadManager = new UploadManager(config); // UploadManager对象只需要创建一次重复使用
 
 //        data = "/storage/emulated/0/DCIM/Camera/IMG_20190623_172115.jpg"; //要上传的文件
-        MyApplication myApplication = (MyApplication) getApplication();
-        myApplication.setUid("123123");
-        String key = "anzu/" + myApplication.getUid() + "-goodsCover.jpg"; //在服务器的文件名
+        String key = "anzu/" + Constants.uid +Math.random()+ "-goodsCover.jpg"; //在服务器的文件名
         upUrl = "http://yuan619.xyz/" + key;
         /**
          * 生成token

@@ -34,7 +34,7 @@ public class SoldoutTabFragment extends Fragment {
 
     public void initData(){
         for(int i = 0 ; i < 6; i++){
-            goodsList.add(new GoodsItem(R.drawable.img_goods_switch,"任天堂游戏机switch家庭游戏亲子游戏机","编码：2113B","￥ 200.00/周","库存： 0"));
+            goodsList.add(new GoodsItem("http://yuan619.xyz/anzu/123123-goodsCover.jpg","任天堂游戏机switch家庭游戏亲子游戏机","编码：2113B","￥ 200.00/周","库存： 0"));
         }
     }
 }

@@ -15,14 +15,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/goods_main"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="2dp"
-                android:background="@color/white"
+                android:background="@drawable/bg_upborder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -41,7 +44,7 @@
 
                 <EditText
                     android:id="@+id/goods_main_content"
-                    android:layout_width="250dp"
+                    android:layout_width="230dp"
                     android:layout_height="50dp"
                     android:hint="最多可填8个汉字"
                     android:textSize="16sp"
@@ -85,7 +88,7 @@
 
                 <EditText
                     android:id="@+id/goods_sub_content"
-                    android:layout_width="250dp"
+                    android:layout_width="230dp"
                     android:layout_height="50dp"
                     android:hint="最多可填64个汉字"
                     android:textSize="16sp"
@@ -110,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="2dp"
-                android:background="@color/white"
+                android:background="@drawable/bg_downborder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/goods_sub">
@@ -129,7 +132,7 @@
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/goods_category_content"
-                    android:layout_width="260dp"
+                    android:layout_width="240dp"
                     android:layout_height="40dp"
                     android:spinnerMode="dialog"
                     android:theme="@style/goods_spinner"
@@ -143,7 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/white"
+                android:background="@drawable/bg_upborder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/goods_category">
@@ -166,9 +169,13 @@
                 android:id="@+id/goods_detail_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:background="@color/white"
-                android:hint="请填写参数\n"
+                android:layout_marginTop="1dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@drawable/bg_downborder"
+                android:minLines="3"
+                android:hint="请填写参数..."
+                android:gravity="top"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -190,7 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/white"
+                android:background="@drawable/bg_upborder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/goods_detail_content">
@@ -209,7 +216,7 @@
 
                 <EditText
                     android:id="@+id/goods_price_content"
-                    android:layout_width="150dp"
+                    android:layout_width="140dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="100dp"
                     android:hint="请填写价格"
@@ -256,7 +263,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="2dp"
-                android:background="@color/white"
+                android:background="@drawable/bg_downborder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/goods_price">
@@ -275,7 +282,7 @@
 
                 <EditText
                     android:id="@+id/goods_inventory_content"
-                    android:layout_width="250dp"
+                    android:layout_width="230dp"
                     android:layout_height="50dp"
                     android:hint="填写数字"
                     android:textSize="16sp"
@@ -300,7 +307,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/white"
+                android:background="@drawable/bg_upborder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/goods_inventory">
@@ -309,7 +316,7 @@
                     android:id="@+id/goods_rules_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="收货商品评判基本标准(纠纷评判依据，重要!)"
+                    android:text="收货商品评判基本标准(纠纷评判依据)"
                     android:textColor="@color/colorText"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -323,9 +330,13 @@
                 android:id="@+id/goods_rules_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:background="@color/white"
-                android:hint="请填写标准\n"
+                android:minLines="3"
+                android:layout_marginTop="1dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@drawable/bg_downborder"
+                android:hint="请填写标准..."
+                android:gravity="top"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -347,7 +358,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/white"
+                android:background="@drawable/bg_noborder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/goods_rules_content">
@@ -406,8 +417,8 @@
                 android:id="@+id/goods_image"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/white"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_noborder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -441,7 +452,7 @@
                     android:id="@+id/goods_iv_warn7"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="10dp"
                     android:visibility="gone"
                     android:src="@drawable/ic_warn"
                     app:layout_constraintBottom_toBottomOf="parent"

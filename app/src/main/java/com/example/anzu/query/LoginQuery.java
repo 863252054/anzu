@@ -24,6 +24,7 @@ public class LoginQuery implements Runnable {
     private String cellphone;
     private String password;
     private String uid = "";
+    private Message msg = new Message();
     private static String url = "https://www.yuan619.xyz:8886/shopUser/login";
     private static String url2 = "https://www.yuan619.xyz:8886/shop/getByUid";
 
@@ -37,7 +38,9 @@ public class LoginQuery implements Runnable {
     public void run() {
         try {
             doGet();
-            getShop();
+            if (msg.what == Constants.OK) {
+                getShop();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,7 +66,6 @@ public class LoginQuery implements Runnable {
                     new TypeReference<Result<ShopUser>>
                             (ShopUser.class){});
             ShopUser shopUser = userResult.getData();
-            Message msg = new Message();
             if (shopUser != null) {
                 msg.what = Constants.OK;
                 msg.obj = shopUser;
