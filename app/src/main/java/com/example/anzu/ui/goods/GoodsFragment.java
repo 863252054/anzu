@@ -1,9 +1,11 @@
 package com.example.anzu.ui.goods;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,6 +15,8 @@ import com.example.anzu.R;
 import com.example.anzu.ui.goods.goodsTab.CheckTabFragment;
 import com.example.anzu.ui.goods.goodsTab.SaleTabFragment;
 import com.example.anzu.ui.goods.goodsTab.SoldoutTabFragment;
+import com.example.anzu.ui.login.LoginActivity;
+import com.example.anzu.ui.openShop.OpenShopActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -24,6 +28,8 @@ public class GoodsFragment extends Fragment {
     private String[] goodsTitles = new String[]{"销售中 6","审核中 6","已下架 6"};  //订单页的菜单标题
     private ArrayList<Fragment> goodsFragments = new ArrayList<>();  //订单页的页面列表容器
     private GoodsPagerAdapter goodsPagerAdapter;  //订单页的pagerAdapter
+
+    private Button deliver;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +52,20 @@ public class GoodsFragment extends Fragment {
         for(int i=0;i<goodsTitles.length;i++){
             goodsTabLayout.getTabAt(i).setText(goodsTitles[i]);
         }
+
+        //点击上架新商品后跳转
+        deliver = (Button)root.findViewById(R.id.goods_deliver_button);
+        deliver.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), GoodsShelvesActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                }
+        );
+
         return root;
     }
 }
