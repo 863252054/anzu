@@ -37,28 +37,11 @@ public class MyFragment extends Fragment {
         //绑定组件
         head = (ImageView) root1.findViewById(R.id.iv_my_head);
         name = (TextView) root1.findViewById(R.id.tv_username);
-        //handler
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what){
-                    case Constants.OK:
-                        String key = "?v=" + new Random().nextLong();
-                        Glide.with(getActivity())
-                                .load(((Shop)msg.obj).getShopLogo() + key)
-                                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
-                                .into(head);
-                        name.setText(((Shop)msg.obj).getShopName());
-                        break;
-                    case Constants.FAIL:
-
-                        break;
-                }
-            }
-        };
-        GetShopQuery getShopQuery = new GetShopQuery(handler, Constants.uid);
-        Thread getShopThread = new Thread(getShopQuery);
-        getShopThread.start();
+        Glide.with(getActivity())
+                .load(Constants.shop.getShopLogo())
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(head);
+        name.setText(Constants.shop.getShopName());
         return root1;
     }
 }

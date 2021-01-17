@@ -53,8 +53,6 @@ public class UpShopQuery implements Runnable {
         if(response.isSuccessful()){
             String result = response.body().string();
             Log.i("testQuery", result);
-            //解析Json数据
-//            JSON.parseObject(result, User.class);
             Result<Shop> userResult = JSON.parseObject(
                     result,
                     new TypeReference<Result<Shop>>
@@ -68,7 +66,13 @@ public class UpShopQuery implements Runnable {
                 msg.what = Constants.FAIL;
                 msg.obj = null;
             }
-            this.handler.sendMessage(msg);
+            try {
+                Thread.sleep(2500);
+                this.handler.sendMessage(msg);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else {
             Message msg = new Message();
             msg.what = Constants.NET;

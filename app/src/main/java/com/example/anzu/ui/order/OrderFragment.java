@@ -1,6 +1,8 @@
 package com.example.anzu.ui.order;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +13,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.anzu.Constants;
 import com.example.anzu.R;
+import com.example.anzu.bean.Shop;
+import com.example.anzu.query.GetShopQuery;
 import com.example.anzu.ui.order.orderTab.FinishTabFragment;
 import com.example.anzu.ui.order.orderTab.ProblemTabFragment;
 import com.example.anzu.ui.order.orderTab.UnderwayTabFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class OrderFragment extends Fragment {
 
@@ -49,6 +58,31 @@ public class OrderFragment extends Fragment {
 
         for(int i=0;i<orderTitles.length;i++){
             orderTabLayout.getTabAt(i).setText(orderTitles[i]);
+        }
+
+        /**
+         * 初始化数据
+         */
+        //handler
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what){
+                    case Constants.OK:
+                        Constants.shop = (Shop)msg.obj;
+                        break;
+                    case Constants.FAIL:
+
+                        break;
+                }
+            }
+        };
+        //初始化
+        if (!Constants.loaded) {
+            GetShopQuery getShopQuery = new GetShopQuery(handler, Constants.uid);
+            Thread getShopThread = new Thread(getShopQuery);
+            getShopThread.start();
+            Constants.loaded = true;
         }
 
         return root;

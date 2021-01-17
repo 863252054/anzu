@@ -66,6 +66,8 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class OpenShopActivity extends AppCompatActivity implements View.OnClickListener {
     //AK P6Hy0f7PHEo0A13_ow3-0_OGvYdFibL8r4eEicIg
@@ -120,6 +122,14 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     case Constants.OK:
                         Intent intent = new Intent(OpenShopActivity.this, MainActivity.class);
                         startActivity(intent);
+//                        TimerTask task = new TimerTask() {
+//                            @Override
+//                            public void run() {
+//                                startActivity(intent);
+//                            }
+//                        };
+//                        Timer timer = new Timer();
+//                        timer.schedule(task, 2000);
                         OpenShopActivity.this.finish();
                         break;
                     case Constants.FAIL:
@@ -173,7 +183,6 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 } else {
                     uploadPic(localUrl);
                     MyApplication myApplication = (MyApplication) getApplication();
-                    myApplication.setUid("123123");
                     Map<String, String> params = new HashMap<>();
                     params.put("uid", myApplication.getUid());
                     params.put("holderName", holderName.getText().toString());
@@ -185,6 +194,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     UpShopQuery upShopQuery = new UpShopQuery(handler, params);
                     Thread upShopThread = new Thread(upShopQuery);
                     upShopThread.start();
+                    Toast.makeText(OpenShopActivity.this, "提交成功，信息上传中，请稍候...", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -347,11 +357,11 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case RC_TAKE_PHOTO:   //拍照权限申请返回
-                if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    takePhoto();
-                }
-                break;
+//            case RC_TAKE_PHOTO:   //拍照权限申请返回
+//                if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+//                    takePhoto();
+//                }
+//                break;
             case RC_CHOOSE_PHOTO:  //相册选择照片权限申请返回
                 if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     choosePhoto();
@@ -376,7 +386,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
             fileDir.mkdirs();
         }
         //随机照片编号
-        String key = new Random().nextLong() + ".jpg";
+        String key = new Random().nextLong() + ".jpeg";
         File photoFile = new File(fileDir, key);
         tempPhotoPath = photoFile.getAbsolutePath();
         imageUri = FileProvider7.getUriForFile(this, photoFile);
@@ -467,7 +477,6 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
 
 //        data = "/storage/emulated/0/DCIM/Camera/IMG_20190623_172115.jpg"; //要上传的文件
         MyApplication myApplication = (MyApplication) getApplication();
-        myApplication.setUid("123123");
         String key = "anzu/" + myApplication.getUid() + "-logo.jpg"; //在服务器的文件名
         upUrl = "http://yuan619.xyz/" + key;
         /**

@@ -39,6 +39,7 @@ public class GetShopQuery implements Runnable {
     }
     public void getShop() throws IOException {
         OkHttpClient okHttpClient = new OkHttpClient();
+        System.out.println("uid" + uid);
         MultipartBody multipartBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("uid", uid)
