@@ -1,6 +1,7 @@
 package com.example.anzu.ui.goods;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -136,6 +137,9 @@ public class GoodsShelvesActivity extends AppCompatActivity
                 }
             }
         };
+
+        //申请文件读取权限
+        verifyStoragePermissions(this);
 
         //点击按钮事件
         commit.setOnClickListener(new View.OnClickListener() {
@@ -403,7 +407,7 @@ public class GoodsShelvesActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case RC_CHOOSE_PHOTO:
-                if (data == null) {
+                if (resultCode == 0) {
                     return;
                 } else {
                     Uri uri = data.getData();
@@ -425,14 +429,18 @@ public class GoodsShelvesActivity extends AppCompatActivity
                 }
                 break;
             case RC_TAKE_PHOTO:
-                RequestOptions requestOptions = new RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE);
-                //显示图片
-                goodsCoverUrl = tempPhotoPath;
-                localUrl = tempPhotoPath;
+                RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.ic_lease);
+                if (resultCode == 0) {
+                    return;
+                }else{
+                    goodsCoverUrl = tempPhotoPath;
+                    localUrl = tempPhotoPath;
                     warn7.setVisibility(View.GONE);
                     Glide.with(this)
                             .load(tempPhotoPath)
+                            .apply(requestOptions)
                             .into(goodsCover);
+                }
                 break;
         }
     }
@@ -564,5 +572,21 @@ public class GoodsShelvesActivity extends AppCompatActivity
                 },
                 null
         );
+    }
+
+    //文件读取权限申请
+    private final int REQUEST_EXTERNAL_STORAGE = 4;
+    private String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE };
+    public  void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE);
+        }
     }
 }

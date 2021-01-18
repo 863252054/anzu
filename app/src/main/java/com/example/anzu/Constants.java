@@ -3,6 +3,7 @@ package com.example.anzu;
 import com.example.anzu.bean.Shop;
 
 public class Constants {
+    public static String location="";
     public static boolean loaded = false;
     public static Shop shop;
     public static String uid = "";

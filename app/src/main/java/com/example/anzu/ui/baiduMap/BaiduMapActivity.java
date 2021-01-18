@@ -22,6 +22,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.example.anzu.Constants;
 import com.example.anzu.R;
 
 import java.util.List;
@@ -83,6 +84,7 @@ public class BaiduMapActivity extends Activity {
                     // 此处设置开发者获取到的方向信息，顺时针0-360
                     .direction(location.getDirection()).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
+            Constants.location=location.getCity()+location.getDistrict()+location.getStreet();
             mBaiduMap.setMyLocationData(locData);
         }
     }
@@ -121,6 +123,7 @@ public class BaiduMapActivity extends Activity {
         mLocationClient = new LocationClient(getApplicationContext());
 //通过LocationClientOption设置LocationClient相关参数
         LocationClientOption option = new LocationClientOption();
+        option.setIsNeedAddress(true);//需要地址信息
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(1000);

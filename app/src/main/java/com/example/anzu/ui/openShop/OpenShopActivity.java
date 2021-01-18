@@ -65,11 +65,15 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class OpenShopActivity extends AppCompatActivity implements View.OnClickListener {
     //AK P6Hy0f7PHEo0A13_ow3-0_OGvYdFibL8r4eEicIg
@@ -78,6 +82,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
 
     public static final int RC_TAKE_PHOTO = 1; //拍照
     public static final int RC_CHOOSE_PHOTO = 2; //相册
+    public static final int RC_LOCATION = 3; //位置权限
     private String tempPhotoPath;
     private Uri imageUri;
     private String localUrl = "";
@@ -281,11 +286,12 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(OpenShopActivity.this, BaiduMapActivity.class);
-                        startActivity(intent);
+                        ActivityCompat.requestPermissions(OpenShopActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, RC_LOCATION);
+
                     }
                 }
         );
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -298,6 +304,13 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        address.setText(Constants.location);
     }
 
     //点击事件
@@ -333,7 +346,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.btn_take_photo:
                     takePhotoPopWin.dismiss();
                     System.out.println("takePhoto");
-                    if (ContextCompat.checkSelfPermission(OpenShopActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(OpenShopActivity.this, Manifest.permission.CAMERA) != PERMISSION_GRANTED) {
                         //未授权，申请授权
                         ActivityCompat.requestPermissions(OpenShopActivity.this, new String[]{Manifest.permission.CAMERA}, RC_TAKE_PHOTO);
                     } else {
@@ -344,7 +357,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.btn_pick_photo:
                     takePhotoPopWin.dismiss();
                     System.out.println("choosePhoto");
-                    if (ContextCompat.checkSelfPermission(OpenShopActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(OpenShopActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
                         //未授权，申请授权
                         ActivityCompat.requestPermissions(OpenShopActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, RC_CHOOSE_PHOTO);
                     } else {
@@ -361,19 +374,24 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case RC_TAKE_PHOTO:   //拍照权限申请返回
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     takePhoto();
                 } else {
                     Log.i("相机权限回调", "被拒绝了！");
                 }
                 break;
             case RC_CHOOSE_PHOTO:   //相册选择照片权限申请返回
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     choosePhoto();
                 } else {
                     Log.i("相册权限回调", "被拒绝了！");
                 }
                 break;
+            case RC_LOCATION:
+                if(grantResults.length>0 && grantResults[0] == PERMISSION_GRANTED){
+                    Intent intent = new Intent(OpenShopActivity.this, BaiduMapActivity.class);
+                    startActivity(intent);
+                }
         }
     }
 
@@ -566,7 +584,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
     }
 
     //文件读取权限申请
-    private final int REQUEST_EXTERNAL_STORAGE = 3;
+    private final int REQUEST_EXTERNAL_STORAGE = 4;
     private String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE };
