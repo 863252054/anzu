@@ -1,6 +1,7 @@
 package com.example.anzu.ui.openShop;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -115,6 +116,8 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_open_shop);
         //初始化
         init();
+        //申请文件读取权限
+        verifyStoragePermissions(this);
 
         //handler
         final Handler handler = new Handler() {
@@ -124,14 +127,6 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     case Constants.OK:
                         Intent intent = new Intent(OpenShopActivity.this, MainActivity.class);
                         startActivity(intent);
-//                        TimerTask task = new TimerTask() {
-//                            @Override
-//                            public void run() {
-//                                startActivity(intent);
-//                            }
-//                        };
-//                        Timer timer = new Timer();
-//                        timer.schedule(task, 2000);
                         OpenShopActivity.this.finish();
                         break;
                     case Constants.FAIL:
@@ -393,13 +388,11 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
     //调用拍照
     private void takePhoto() {
         Intent intentToTakePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File fileDir = new File(Environment.getExternalStorageDirectory() + File.separator + "photoTest" + File.separator);
+        File fileDir = new File(Environment.getExternalStorageDirectory() + File.separator + "uploadImage" + File.separator);
         if (!fileDir.exists()) {
             fileDir.mkdirs();
         }
-        //随机照片编号
-        String key = new Random().nextLong() + ".jpeg"; //webp
-        File photoFile = new File(fileDir, key);
+        File photoFile = new File(fileDir,  System.currentTimeMillis() + ".jpeg");
         tempPhotoPath = photoFile.getAbsolutePath();
         imageUri = FileProvider7.getUriForFile(this, photoFile);
         intentToTakePhoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -409,9 +402,10 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
     //处理照片并显示
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
         switch (requestCode) {
             case RC_CHOOSE_PHOTO:
+                System.out.println("resultcode" + resultCode);
                 if (resultCode == 0) {
                     return;
                 } else {
@@ -420,7 +414,6 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     MyApplication myApplication = (MyApplication) getApplication();
                     myApplication.setLogoPath(filePath);
                     if (!TextUtils.isEmpty(filePath)) {
-//                        RequestOptions requestOptions1 = new RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE);
                         RequestOptions requestOptions1 = new RequestOptions().placeholder(R.drawable.ic_lease).error(R.drawable.ic_lease);
                         RequestOptions requestOptions2 = new RequestOptions().placeholder(R.drawable.ic_plus).error(R.drawable.ic_plus);
                         //显示图片
@@ -442,12 +435,12 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case RC_TAKE_PHOTO:
-                RequestOptions requestOptions1 = new RequestOptions().placeholder(R.drawable.ic_lease);
-                RequestOptions requestOptions2 = new RequestOptions().placeholder(R.drawable.ic_plus);
+                RequestOptions requestOptions1 = new RequestOptions().placeholder(R.drawable.ic_lease).error(R.drawable.ic_lease);
+                RequestOptions requestOptions2 = new RequestOptions().placeholder(R.drawable.ic_plus).error(R.drawable.ic_plus);
+                //显示图片
                 if (resultCode == 0) {
                     return;
                 } else {
-                    //显示图片
                     if (currentPic == logo) {
                         localUrl = tempPhotoPath;
                         Glide.with(this)
@@ -465,6 +458,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     //上传图片到七牛云
@@ -569,5 +563,21 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
         //设置属性
         String tipText = "我已阅读并同意《安租商家协议》";
         checkBox.setText(StringDesignUtil.getSpanned(tipText, "《安租商家协议》", "#FF7F00"));
+    }
+
+    //文件读取权限申请
+    private final int REQUEST_EXTERNAL_STORAGE = 3;
+    private String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE };
+    public  void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE);
+        }
     }
 }
