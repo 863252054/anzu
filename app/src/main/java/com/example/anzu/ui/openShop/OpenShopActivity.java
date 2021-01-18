@@ -350,7 +350,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
         }
     };
 
-    //权限申请回调
+    // 权限申请回调
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
