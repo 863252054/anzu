@@ -135,9 +135,6 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     case Constants.FAIL:
                         Toast.makeText(OpenShopActivity.this, "FAIL", Toast.LENGTH_SHORT).show();
                         break;
-                    case Constants.NET:
-                        Toast.makeText(OpenShopActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
-                        break;
                 }
             }
         };
@@ -194,7 +191,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     UpShopQuery upShopQuery = new UpShopQuery(handler, params);
                     Thread upShopThread = new Thread(upShopQuery);
                     upShopThread.start();
-                    Toast.makeText(OpenShopActivity.this, "提交成功，信息上传中，请稍候...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OpenShopActivity.this, "提交成功，信息上传中，请稍候...", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -353,18 +350,22 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
         }
     };
 
-    //权限申请
+    //权限申请回调
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-//            case RC_TAKE_PHOTO:   //拍照权限申请返回
-//                if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-//                    takePhoto();
-//                }
-//                break;
-            case RC_CHOOSE_PHOTO:  //相册选择照片权限申请返回
-                if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            case RC_TAKE_PHOTO:   //拍照权限申请返回
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    takePhoto();
+                } else {
+                    Log.i("相机权限回调", "被拒绝了！");
+                }
+                break;
+            case RC_CHOOSE_PHOTO:   //相册选择照片权限申请返回
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     choosePhoto();
+                } else {
+                    Log.i("相册权限回调", "被拒绝了！");
                 }
                 break;
         }
@@ -386,7 +387,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
             fileDir.mkdirs();
         }
         //随机照片编号
-        String key = new Random().nextLong() + ".jpeg";
+        String key = new Random().nextLong() + ".jpeg"; //webp
         File photoFile = new File(fileDir, key);
         tempPhotoPath = photoFile.getAbsolutePath();
         imageUri = FileProvider7.getUriForFile(this, photoFile);
@@ -408,40 +409,48 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     MyApplication myApplication = (MyApplication) getApplication();
                     myApplication.setLogoPath(filePath);
                     if (!TextUtils.isEmpty(filePath)) {
-                        RequestOptions requestOptions1 = new RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE);
+//                        RequestOptions requestOptions1 = new RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE);
+                        RequestOptions requestOptions1 = new RequestOptions().placeholder(R.drawable.ic_lease).error(R.drawable.ic_lease);
+                        RequestOptions requestOptions2 = new RequestOptions().placeholder(R.drawable.ic_plus).error(R.drawable.ic_plus);
                         //显示图片
-                        System.out.println("path:" + filePath);
                         if (currentPic == logo) {
                             localUrl = filePath;
                             Glide.with(this)
                                     .load(filePath)
-                                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                                    .apply(requestOptions1.bitmapTransform(new CircleCrop()))
                                     .into(logo);
                         } else {
                             licenseUrl = filePath;
                             warn6.setVisibility(View.GONE);
                             Glide.with(this)
                                     .load(filePath)
+                                    .apply(requestOptions2)
                                     .into(license);
                         }
                     }
                 }
                 break;
             case RC_TAKE_PHOTO:
-                RequestOptions requestOptions = new RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE);
-                //显示图片
-                if (currentPic == logo) {
-                    localUrl = tempPhotoPath;
-                    Glide.with(this)
-                            .load(tempPhotoPath)
-                            .apply(RequestOptions.bitmapTransform(new CircleCrop()))
-                            .into(logo);
+                if (data == null) {
+                    return;
                 } else {
-                    licenseUrl = tempPhotoPath;
-                    warn6.setVisibility(View.GONE);
-                    Glide.with(this)
-                            .load(tempPhotoPath)
-                            .into(license);
+                    RequestOptions requestOptions1 = new RequestOptions().placeholder(R.drawable.ic_lease).error(R.drawable.ic_lease);
+                    RequestOptions requestOptions2 = new RequestOptions().placeholder(R.drawable.ic_plus).error(R.drawable.ic_plus);
+                    //显示图片
+                    if (currentPic == logo) {
+                        localUrl = tempPhotoPath;
+                        Glide.with(this)
+                                .load(tempPhotoPath)
+                                .apply(requestOptions1.bitmapTransform(new CircleCrop()))
+                                .into(logo);
+                    } else {
+                        licenseUrl = tempPhotoPath;
+                        warn6.setVisibility(View.GONE);
+                        Glide.with(this)
+                                .load(tempPhotoPath)
+                                .apply(requestOptions2)
+                                .into(license);
+                    }
                 }
                 break;
         }
