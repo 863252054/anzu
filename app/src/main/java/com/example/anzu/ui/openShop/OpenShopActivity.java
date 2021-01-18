@@ -309,8 +309,9 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
-
         address.setText(Constants.location);
+        warn5.setVisibility(View.GONE);
+
     }
 
     //点击事件

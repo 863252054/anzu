@@ -53,7 +53,7 @@ public class GoodsFragment extends Fragment {
         goodsFragments.add(new CheckTabFragment()); //已完成页
         goodsFragments.add(new SoldoutTabFragment());  //问题单页
 
-      //展示页的设置
+        //展示页的设置
         goodsTabLayout.setupWithViewPager(goodsViewPager,false);
         goodsPagerAdapter = new GoodsPagerAdapter(goodsFragments, getChildFragmentManager());
         goodsViewPager.setAdapter(goodsPagerAdapter);
