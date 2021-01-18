@@ -412,7 +412,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case RC_CHOOSE_PHOTO:
-                if (data == null) {
+                if (resultCode == 0) {
                     return;
                 } else {
                     Uri uri = data.getData();
@@ -445,7 +445,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 RequestOptions requestOptions1 = new RequestOptions().placeholder(R.drawable.ic_lease);
                 RequestOptions requestOptions2 = new RequestOptions().placeholder(R.drawable.ic_plus);
                 if (resultCode == 0) {
-
+                    return;
                 } else {
                     //显示图片
                     if (currentPic == logo) {
