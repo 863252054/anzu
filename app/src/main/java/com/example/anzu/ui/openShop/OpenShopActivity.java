@@ -313,7 +313,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    //底部弹出
+    // 底部弹出
     public void showPopFormBottom(View view) {
         takePhotoPopWin = new TakePhotoPopWin(OpenShopActivity.this, onClickListener);
         //showAtLocation(View parent, int gravity, int x, int y)
