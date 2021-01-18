@@ -227,10 +227,10 @@
                 android:id="@+id/open_sp_shop_type"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:spinnerMode="dialog"
-                android:overlapAnchor="false"
-                android:entries="@array/type_class"
                 android:backgroundTint="@color/colorText"
+                android:entries="@array/type_class"
+                android:overlapAnchor="false"
+                android:spinnerMode="dialog"
                 app:layout_constraintEnd_toEndOf="@+id/open_et_shop_name"
                 app:layout_constraintStart_toStartOf="@+id/open_et_shop_name"
                 app:layout_constraintTop_toBottomOf="@+id/open_shop_line1" />
@@ -286,6 +286,15 @@
                 app:layout_constraintBottom_toBottomOf="@+id/open_et_shop_address"
                 app:layout_constraintLeft_toRightOf="@+id/open_et_shop_address"
                 app:layout_constraintTop_toTopOf="@+id/open_et_shop_address" />
+
+            <ImageView
+                android:id="@+id/open_location_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/open_et_shop_address"
+                app:layout_constraintTop_toBottomOf="@+id/open_sp_shop_type"
+                app:srcCompat="@drawable/ic_locate" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

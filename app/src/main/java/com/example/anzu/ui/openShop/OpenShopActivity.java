@@ -46,6 +46,7 @@ import com.example.anzu.R;
 import com.example.anzu.bean.Shop;
 import com.example.anzu.bean.ShopUser;
 import com.example.anzu.query.UpShopQuery;
+import com.example.anzu.ui.baiduMap.BaiduMapActivity;
 import com.example.anzu.ui.components.TakePhotoPopWin;
 import com.example.anzu.ui.login.LoginActivity;
 import com.example.anzu.ui.register.RegisterActivity;
@@ -96,6 +97,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
     private EditText shopName;
     private Spinner shopType;
     private EditText address;
+    private ImageView openMap;
     private CheckBox checkBox;
     private Button commit;
     //警告icon
@@ -280,6 +282,15 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
+        openMap.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(OpenShopActivity.this, BaiduMapActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -541,6 +552,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
         shopName = (EditText) findViewById(R.id.open_et_shop_name);
         shopType = (Spinner) findViewById(R.id.open_sp_shop_type);
         address = (EditText) findViewById(R.id.open_et_shop_address);
+        openMap = (ImageView)findViewById(R.id.open_location_map);
         checkBox = (CheckBox) findViewById(R.id.open_check);
         warn1 = (ImageView) findViewById(R.id.open_iv_warn1);
         warn2 = (ImageView) findViewById(R.id.open_iv_warn2);

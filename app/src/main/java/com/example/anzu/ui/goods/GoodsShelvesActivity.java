@@ -353,17 +353,23 @@ public class GoodsShelvesActivity extends AppCompatActivity
         }
     };
 
-    //权限申请
+    // 权限申请回调
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case RC_TAKE_PHOTO:   //拍照权限申请返回
-                if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     takePhoto();
+                } else {
+                    Log.i("相机权限回调", "被拒绝了！");
                 }
                 break;
             case RC_CHOOSE_PHOTO:   //相册选择照片权限申请返回
-                choosePhoto();
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    choosePhoto();
+                } else {
+                    Log.i("相册权限回调", "被拒绝了！");
+                }
                 break;
         }
     }
