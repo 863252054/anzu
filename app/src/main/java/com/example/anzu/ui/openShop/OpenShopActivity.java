@@ -442,11 +442,11 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case RC_TAKE_PHOTO:
-                if (data == null) {
-                    return;
+                RequestOptions requestOptions1 = new RequestOptions().placeholder(R.drawable.ic_lease);
+                RequestOptions requestOptions2 = new RequestOptions().placeholder(R.drawable.ic_plus);
+                if (resultCode == 0) {
+
                 } else {
-                    RequestOptions requestOptions1 = new RequestOptions().placeholder(R.drawable.ic_lease).error(R.drawable.ic_lease);
-                    RequestOptions requestOptions2 = new RequestOptions().placeholder(R.drawable.ic_plus).error(R.drawable.ic_plus);
                     //显示图片
                     if (currentPic == logo) {
                         localUrl = tempPhotoPath;
