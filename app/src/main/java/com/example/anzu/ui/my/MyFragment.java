@@ -37,9 +37,10 @@ public class MyFragment extends Fragment {
         //绑定组件
         head = (ImageView) root1.findViewById(R.id.iv_my_head);
         name = (TextView) root1.findViewById(R.id.tv_username);
+        RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.ic_lease);
         Glide.with(getActivity())
                 .load(Constants.shop.getShopLogo())
-                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .apply(requestOptions.bitmapTransform(new CircleCrop()))
                 .into(head);
         name.setText(Constants.shop.getShopName());
         return root1;

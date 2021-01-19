@@ -46,8 +46,7 @@ public class PrivacyActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PrivacyActivity.this, LoginActivity.class);
-                startActivity(intent);
+                PrivacyActivity.this.finish();
             }
         });
     }

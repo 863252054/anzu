@@ -66,14 +66,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onClick(View v) {
                 if (code.getText().toString().length() != 6) {
                     Toast.makeText(RegisterActivity.this, "验证码错误", Toast.LENGTH_SHORT).show();
-                } else {
-                    RegisterQuery registerQuery = new RegisterQuery(handler,
-                            realCellphone,
-                            code.getText().toString(),
-                            password.getText().toString());
-                    Thread loginThread = new Thread(registerQuery);
-                    loginThread.start();
+                    return;
                 }
+                if (password.getText().toString().length() < 6) {
+                    Toast.makeText(RegisterActivity.this, "请设置至少6位的密码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                RegisterQuery registerQuery = new RegisterQuery(handler,
+                        realCellphone,
+                        code.getText().toString(),
+                        password.getText().toString());
+                Thread loginThread = new Thread(registerQuery);
+                loginThread.start();
             }
         });
 
@@ -81,6 +85,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         codeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (cellphone.getText().toString().charAt(0) != '1') {
+                    Toast.makeText(RegisterActivity.this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 codeBtn.setEnabled(false);
                 codeBtn.setAlpha((float) 0.6);
                 //60s重试倒计时
@@ -193,8 +201,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         toLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
+                RegisterActivity.this.finish();
             }
         });
 

@@ -33,39 +33,24 @@ public class TakePhotoPopWin extends PopupWindow {
         // 设置按钮监听
         btn_pick_photo.setOnClickListener(itemsOnClick);
         btn_take_photo.setOnClickListener(itemsOnClick);
-        //选择拍照或相册后摧毁弹出框
-//        btn_pick_photo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dismiss();
-//            }
-//        });
-//        btn_take_photo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dismiss();
-//            }
-//        });
 
         // 设置外部可点击
         this.setOutsideTouchable(true);
-        // mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
+        // 监听判断获取触屏位置如果在选择框外面则销毁弹出框
         this.view.setOnTouchListener(new View.OnTouchListener() {
-
             public boolean onTouch(View v, MotionEvent event) {
-
+                // 弹窗顶部与屏幕顶部的距离
                 int height = view.findViewById(R.id.pop_layout).getTop();
-
+                // 点击的位置
                 int y = (int) event.getY();
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (y < height) {
+                if (event.getAction() == MotionEvent.ACTION_UP) { //手指完全离开
+                    if (y < height) { // 点击位置在弹窗以上，则销毁弹窗
                         dismiss();
                     }
                 }
                 return true;
             }
         });
-
 
         /* 设置弹出窗口特征 */
         // 设置视图

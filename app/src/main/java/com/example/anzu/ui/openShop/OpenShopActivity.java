@@ -83,6 +83,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
     public static final int RC_TAKE_PHOTO = 1; //拍照
     public static final int RC_CHOOSE_PHOTO = 2; //相册
     public static final int RC_LOCATION = 3; //位置权限
+    private final int REQUEST_EXTERNAL_STORAGE = 4; //SD卡写入
     private String tempPhotoPath;
     private Uri imageUri;
     private String localUrl = "";
@@ -290,7 +291,6 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
         );
-
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -345,7 +345,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.btn_take_photo:
                     takePhotoPopWin.dismiss();
                     System.out.println("takePhoto");
-                    if (ContextCompat.checkSelfPermission(OpenShopActivity.this, Manifest.permission.CAMERA) != PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(OpenShopActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                         //未授权，申请授权
                         ActivityCompat.requestPermissions(OpenShopActivity.this, new String[]{Manifest.permission.CAMERA}, RC_TAKE_PHOTO);
                     } else {
@@ -356,7 +356,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.btn_pick_photo:
                     takePhotoPopWin.dismiss();
                     System.out.println("choosePhoto");
-                    if (ContextCompat.checkSelfPermission(OpenShopActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(OpenShopActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                         //未授权，申请授权
                         ActivityCompat.requestPermissions(OpenShopActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, RC_CHOOSE_PHOTO);
                     } else {
@@ -372,15 +372,17 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case RC_TAKE_PHOTO:   //拍照权限申请返回
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+            case RC_TAKE_PHOTO:   //拍照权限申请回调
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //已授权
                     takePhoto();
                 } else {
+                    //未授权
                     Log.i("相机权限回调", "被拒绝了！");
                 }
                 break;
             case RC_CHOOSE_PHOTO:   //相册选择照片权限申请返回
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     choosePhoto();
                 } else {
                     Log.i("相册权限回调", "被拒绝了！");
@@ -397,19 +399,23 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
 
     //调用相册获取图片
     private void choosePhoto() {
+        // 跳转到相册
         Intent intentToPickPic = new Intent(Intent.ACTION_PICK, null);
+        // 设置图片类型
         intentToPickPic.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         startActivityForResult(intentToPickPic, RC_CHOOSE_PHOTO);
     }
 
-
     //调用拍照
     private void takePhoto() {
+        // 跳转至相机
         Intent intentToTakePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // 新建目录
         File fileDir = new File(Environment.getExternalStorageDirectory() + File.separator + "uploadImage" + File.separator);
         if (!fileDir.exists()) {
             fileDir.mkdirs();
         }
+        // 设置图片名
         File photoFile = new File(fileDir,  System.currentTimeMillis() + ".jpeg");
         tempPhotoPath = photoFile.getAbsolutePath();
         imageUri = FileProvider7.getUriForFile(this, photoFile);
@@ -417,7 +423,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
         startActivityForResult(intentToTakePhoto, RC_TAKE_PHOTO);
     }
 
-    //处理照片并显示
+    //回调，处理图片
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
@@ -427,21 +433,21 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                 if (resultCode == 0) {
                     return;
                 } else {
-                    Uri uri = data.getData();
+                    Uri uri = data.getData(); //获取对应照片文件夹的uri
                     String filePath = FileUtil.getFilePathByUri(this, uri);
                     MyApplication myApplication = (MyApplication) getApplication();
                     myApplication.setLogoPath(filePath);
                     if (!TextUtils.isEmpty(filePath)) {
+                        //设置页面上图片的载入状态图片和错误状态图片
                         RequestOptions requestOptions1 = new RequestOptions().placeholder(R.drawable.ic_lease).error(R.drawable.ic_lease);
                         RequestOptions requestOptions2 = new RequestOptions().placeholder(R.drawable.ic_plus).error(R.drawable.ic_plus);
-                        //显示图片
-                        if (currentPic == logo) {
+                        if (currentPic == logo) { //显示logo在页面上
                             localUrl = filePath;
                             Glide.with(this)
                                     .load(filePath)
-                                    .apply(requestOptions1.bitmapTransform(new CircleCrop()))
+                                    .apply(requestOptions1.bitmapTransform(new CircleCrop())) //显示为圆形
                                     .into(logo);
-                        } else {
+                        } else { //显示营业执照在页面上
                             licenseUrl = filePath;
                             warn6.setVisibility(View.GONE);
                             Glide.with(this)
@@ -481,59 +487,33 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
 
     //上传图片到七牛云
     protected void uploadPic(String data) {
-        //指定zone的具体区域
-        //FixedZone.zone0   华东机房
-        //FixedZone.zone1   华北机房
-        //FixedZone.zone2   华南机房
-        //FixedZone.zoneNa0 北美机房
-
-
-    /*
-    Configuration config = new Configuration.Builder()
-            .chunkSize(512 * 1024)        // 分片上传时，每片的大小。 默认256K
-            .putThreshhold(1024 * 1024)   // 启用分片上传阀值。默认512K
-            .connectTimeout(10)           // 链接超时。默认10秒
-            .useHttps(true)               // 是否使用https 默认是false
-            .responseTimeout(60)          // 服务器响应超时。默认60秒
-            .recorder(recorder)           // recorder分片上传时，已上传片记录器。默认null
-            .recorder(recorder, keyGen)   // keyGen 分片上传时，生成标识符，用于片记录器区分是那个文件的上传记录
-            .zone(FixedZone.zone0)        // 设置区域，指定不同区域的上传域名、备用域名、备用IP。
-    */
-
+        //基础配置
         Configuration config = new Configuration.Builder()
                 .useHttps(true)               // 是否使用https上传域名
-                .zone(FixedZone.zone0)        // 设置区域，指定不同区域的上传域名、备用域名、备用IP。
+                .zone(FixedZone.zone0)        // 设置区域。
                 .build();
 
         UploadManager uploadManager = new UploadManager(config); // UploadManager对象只需要创建一次重复使用
 
-//        data = "/storage/emulated/0/DCIM/Camera/IMG_20190623_172115.jpg"; //要上传的文件
+        //设置上传文件的url
         MyApplication myApplication = (MyApplication) getApplication();
         String key = "anzu/" + myApplication.getUid() + "-logo.jpg"; //在服务器的文件名
         upUrl = "http://yuan619.xyz/" + key;
-        /**
-         * 生成token
-         * create()方法的两个参数分别是 AK SK
-         * uoloadToken()方法的参数是 要上传到的空间(bucket)
-         */
+        // 用七牛云账户的AK SK生成上传凭证token
         String token = Auth.create("P6Hy0f7PHEo0A13_ow3-0_OGvYdFibL8r4eEicIg", "b4_OZ4LFs_wHwGoYVHPbVDZhsKGP_7HmzBqmdbZp").uploadToken("yuan619");
-
         /**
          * 调用put方法上传
-         * 第一个参数 data：可以是字符串，是要上传图片的路径
-         *                可以是File对象，是要上传的文件
-         *                可以是byte[]数组，要是上传的数据
-         * 第二个参数 key：字符串，是图片在服务器上的名称，要具有唯一性，可以用UUID
-         * 第三个参数 token：根据开发者的 AK和SK 生成的token，这个token 应该在后端提供一个接口，然后android代码中发一个get请求获得这个tocken，但这里为了演示，直接写在本地了.
+         * 第一个参数 data：上传图片的路径
+         * 第二个参数 key：字符串，图片在七牛云上的名称，具有唯一性
+         * 第三个参数 token：根据开发者的 AK和SK 生成的token
          * 第四个参数：UpCompletionHandler的实例，有个回调方法
-         * 第五个参数：可先参数
          */
         uploadManager.put(
                         data, key, token,
                         new UpCompletionHandler() {
                             /**
                              * 回调方法
-                             * @param key 开发者设置的 key 也就是文件名
+                             * @param key 设置的 key 也就是文件名
                              * @param info 日志，包含上传的ip等
                              * @param res 包括一个hash值和key
                              */
@@ -584,16 +564,15 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
     }
 
     //文件读取权限申请
-    private final int REQUEST_EXTERNAL_STORAGE = 4;
     private String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE };
     public  void verifyStoragePermissions(Activity activity) {
-        // Check if we have write permission
+        // 判断写入权限
         int permission = ActivityCompat.checkSelfPermission(activity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
+            // 如果没有权限，则弹窗
             ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE);
         }
