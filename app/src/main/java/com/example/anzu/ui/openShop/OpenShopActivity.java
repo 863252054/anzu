@@ -287,7 +287,6 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onClick(View v) {
                         ActivityCompat.requestPermissions(OpenShopActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, RC_LOCATION);
-
                     }
                 }
         );
@@ -311,7 +310,6 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
         super.onResume();
         address.setText(Constants.location);
         warn5.setVisibility(View.GONE);
-
     }
 
     //点击事件
@@ -393,6 +391,7 @@ public class OpenShopActivity extends AppCompatActivity implements View.OnClickL
                     Intent intent = new Intent(OpenShopActivity.this, BaiduMapActivity.class);
                     startActivity(intent);
                 }
+                break;
         }
     }
 
