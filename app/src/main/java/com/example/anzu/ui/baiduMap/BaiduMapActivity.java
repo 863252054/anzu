@@ -29,7 +29,6 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.example.anzu.Constants;
 import com.example.anzu.MainActivity;
 import com.example.anzu.R;
-
 import java.util.ArrayList;
 import java.util.List;
 public class BaiduMapActivity extends Activity {
