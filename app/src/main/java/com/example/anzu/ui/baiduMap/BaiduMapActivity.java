@@ -1,6 +1,8 @@
 package com.example.anzu.ui.baiduMap;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -8,6 +10,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -23,8 +27,10 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.example.anzu.Constants;
+import com.example.anzu.MainActivity;
 import com.example.anzu.R;
 
+import java.util.ArrayList;
 import java.util.List;
 public class BaiduMapActivity extends Activity {
     private MapView mMapView = null;
@@ -47,6 +53,20 @@ public class BaiduMapActivity extends Activity {
         configure();
         //定位初始化
         init_location();
+        List<String> permissionList = new ArrayList<>();
+        if(ContextCompat.checkSelfPermission(BaiduMapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if(ContextCompat.checkSelfPermission(BaiduMapActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if(ContextCompat.checkSelfPermission(BaiduMapActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if(!permissionList.isEmpty()){
+            String[] permissions =permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(BaiduMapActivity.this, permissions, 1);
+        }
 
     }
     @Override
